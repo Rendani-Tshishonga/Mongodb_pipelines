@@ -10,3 +10,14 @@ Mongodb is a NoSQL database which stores data in the form of documents which are
 We will connect to our Mongodb instances using the Pymongo driver which will help us  to request BSON documents as python dictionaries. Pymongo will allow us to work with native python data types, pymongo automatically converts python data types to and from BSON.
 
 We will seek to build CRUD pipelines (create, update, delete) by importing the MongoClient from the pymongo library which allows us to create a connection to our MongoDB instance through a connection string.
+
+## Data Types
+The data types that need to use PyMongo's bson package include:
+    1. ObjectId
+    2. Int64
+    3. Decimal128
+    4. Regex(regular expressions)
+
+We are not restricted to using the bson package data types, we can also incorporate native Python types when working with Mongodb by using Pymongo.
+
+## Insert a document
