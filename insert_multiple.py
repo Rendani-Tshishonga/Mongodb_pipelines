@@ -12,7 +12,7 @@ import os
 
 # Load Config fron.env file
 load_dotenv()
-MONGODB_URI = os.eviron["MONGODB_URI"]
+MONGODB_URI = os.environ["MONGODB_URI"]
 
 # Connect to MongoDB cluster with MongoClient
 client = MongoClient(MONGODB_URI)

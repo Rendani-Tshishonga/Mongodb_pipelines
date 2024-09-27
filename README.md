@@ -2,6 +2,7 @@
 
 Mongodb is a NoSQL database which stores data in the form of documents which are formatted in a BSON format. There are similarities to the JSON format which are work with in relation to API. 
 ## BSON
+
     1. This is an extension of JSON.
     2. BSON is optimized for storage, retrieval and transmission across the wire.
     3. More secure that JSON.
@@ -12,7 +13,8 @@ We will connect to our Mongodb instances using the Pymongo driver which will hel
 We will seek to build CRUD pipelines (create, update, delete) by importing the MongoClient from the pymongo library which allows us to create a connection to our MongoDB instance through a connection string.
 
 ## Data Types
-The data types that need to use PyMongo's bson package include:
+The data types that need to use PyMongo's bson package include
+
     1. ObjectId
     2. Int64
     3. Decimal128
@@ -21,3 +23,13 @@ The data types that need to use PyMongo's bson package include:
 We are not restricted to using the bson package data types, we can also incorporate native Python types when working with Mongodb by using Pymongo.
 
 ## Insert a document
+
+In MongoDB to insert a document into a collection we will need to append the insert_one() method to the collection object to return a result. The inser_one() method accepts a document as an argument and returns a result.
+
+## Insert documents
+
+We might be required to insert mutliple documents into a collection and Pymongo provides a method to do just that, like the inser_one method which accepts a document, we would use the insert_many() method and pass an array of documents as argument to insert multiple documents to the collection with unique objectId's to represent each unique document.
+
+## Querying a MongoDB collection for a single document
+
+
