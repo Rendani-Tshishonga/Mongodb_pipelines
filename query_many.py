@@ -37,3 +37,6 @@ for documents in account_list:
 
 # Print the result to standard output
 print("# of documents found:" + str(num_docs))
+
+# Close connection to instance
+client.close()

@@ -30,3 +30,7 @@ result = listings_collection.find_one(document_to_find)
 
 # Print the result to standard output
 print(result)
+
+# Close connection to instance
+
+client.close()
