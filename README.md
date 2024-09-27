@@ -32,4 +32,9 @@ We might be required to insert mutliple documents into a collection and Pymongo 
 
 ## Querying a MongoDB collection for a single document
 
+We can return a single document that matches a query by appending the method find_one() to the collection object. The find_one method can accept a filter argument that specifies the query to be performed. The find_one method with parse through the collection to and return the documents which matches the query, or it returns none if there are no matches.
+
+## Querying for multiple documents
+
+We can return multiple documents that match a query and append find() to the collection object. The find method can accept a filter argument that specifies the query to be perfomed on the collection. The find method returns a cursor instance, which allows us to iterate over all matching documents. We will use the cursor instance to print out the document that matched the query as well as the total number of documents found.
 
