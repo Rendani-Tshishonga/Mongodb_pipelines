@@ -1,6 +1,7 @@
 # MongoDB Python Data Pipelines
 
 Mongodb is a NoSQL database which stores data in the form of documents which are formatted in a BSON format. There are similarities to the JSON format which are work with in relation to API. 
+
 ## BSON
 
     1. This is an extension of JSON.
@@ -37,4 +38,12 @@ We can return a single document that matches a query by appending the method fin
 ## Querying for multiple documents
 
 We can return multiple documents that match a query and append find() to the collection object. The find method can accept a filter argument that specifies the query to be perfomed on the collection. The find method returns a cursor instance, which allows us to iterate over all matching documents. We will use the cursor instance to print out the document that matched the query as well as the total number of documents found.
+
+## Update One document
+
+When updating a single document which matches a query we would need to append the update_one method to the collection object. The update_one method has two required parameters, firstly a filter document that matches the document to update and secondly an update that specifies the modifications to apply to the matching document.
+
+## Update many documents
+
+When updating multiple documents that match a specific query we would need to append the update_many method to the collection object. The update_many method also has two required parameters, firtly the filter that matches the document to update and an update document that specifies the modifications to apply to the matching document.
 
