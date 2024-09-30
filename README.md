@@ -47,3 +47,33 @@ When updating a single document which matches a query we would need to append th
 
 When updating multiple documents that match a specific query we would need to append the update_many method to the collection object. The update_many method also has two required parameters, firtly the filter that matches the document to update and an update document that specifies the modifications to apply to the matching document.
 
+## Aggregation Operators
+
+The collecton and the summary of data can be done through operators which enable developers to use built-in methods that can be computed on the data but does not permanently alter it. We can combine the various stages to create a an aggregation pipeline to allow the data to be **filetered**, **stored**, **grouped**, **transformed**.
+
+### Structure of an Aggregation Pipeline
+
+```
+db.collection.aggregate([{
+    $stage1: {
+        {expression 1},
+        {expression 2},
+    },
+    $stage2: {
+        {expression 1}
+    }
+}])
+
+```
+The documents that are output of one stage act as input for the next stage of the aggregation pipeline.
+
+### **$match**
+filters for data that matches criteria
+
+```
+$match {
+    "student_id": 1234
+}
+```
+
+
