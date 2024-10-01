@@ -15,7 +15,11 @@ We will seek to build CRUD pipelines (create, update, delete) by importing the M
 
 ## Data Types
 The data types that need to use PyMongo's bson package include
+We would need to import the bson package to access these data types by:
 
+```
+from bson.objectid import ObjectId
+```
     1. ObjectId
     2. Int64
     3. Decimal128
@@ -46,6 +50,10 @@ When updating a single document which matches a query we would need to append th
 ## Update many documents
 
 When updating multiple documents that match a specific query we would need to append the update_many method to the collection object. The update_many method also has two required parameters, firtly the filter that matches the document to update and an update document that specifies the modifications to apply to the matching document.
+
+## Delete a Single document
+
+We can delete a single document that matches a query by appending the delete_one method to the collection object. The delete_one method has a parameter, which is a filter that matches the document to delete. **We need to note something important about the delete_one method in that if you do not provide a parameter the delete_one method will delete the first document in the collection.**
 
 ## Aggregation Operators
 
