@@ -14,9 +14,11 @@ We will connect to our Mongodb instances using the Pymongo driver which will hel
 We will seek to build CRUD pipelines (create, update, delete) by importing the MongoClient from the pymongo library which allows us to create a connection to our MongoDB instance through a connection string.
 
 ## Data Types
+
 The data types that need to use PyMongo's bson package include
 We would need to import the bson package to access these data types by:
 
+Example:
 ```
 from bson.objectid import ObjectId
 ```
@@ -26,6 +28,19 @@ from bson.objectid import ObjectId
     4. Regex(regular expressions)
 
 We are not restricted to using the bson package data types, we can also incorporate native Python types when working with Mongodb by using Pymongo.
+
+### Create a connection to the Mongodb cluster
+
+We can create a connection to the Mongodb cluster by installing the mongodb compass on your local server to ensure that we have a runtime variable which points to the connection string used to create a connection to the cluster without exposing your passwd externally. This provides a great benefit as you will be able to use environment variables to create connections to your instance and will allow you to query your databases interactively through your local server. We will use the load_dotenv to load the various .env files which contain all variables thats should be loaded into your test or production environments.
+
+Example:
+```
+from dotenv import load_dotenv
+import os # to access the enviroment variable uri
+
+load_dotenv()
+MONGODB_URI = os.environ["MONGODB_URI]
+```
 
 ## Insert a document
 
@@ -59,8 +74,9 @@ We can delete a single document that matches a query by appending the delete_one
 
 The collecton and the summary of data can be done through operators which enable developers to use built-in methods that can be computed on the data but does not permanently alter it. We can combine the various stages to create a an aggregation pipeline to allow the data to be **filetered**, **stored**, **grouped**, **transformed**.
 
-### Structure of an Aggregation Pipeline
+### Structure of a Pipeline
 
+Example:
 ```
 db.collection.aggregate([{
     $stage1: {
@@ -73,15 +89,107 @@ db.collection.aggregate([{
 }])
 
 ```
-The documents that are output of one stage act as input for the next stage of the aggregation pipeline.
+The documents that are output of one stage act as input for the next stage of the pipeline.
 
 ### **$match**
+
 filters for data that matches criteria
 
+Example:
 ```
 $match {
     "student_id": 1234
 }
 ```
+### $group
 
+The $group operator groups documents by a group key
 
+Example:
+```
+{
+    $group:
+    {
+        "_id": expression, # group key
+        <field>: {<accumulator>: <expression>}
+    }
+}
+```
+### $sort
+
+The sort all input documents and passes them through the pipeline in sorted order.
+
+1: Ascending order
+-1: descending order
+
+Example:
+```
+{
+    $sort: {
+        "field-name": 1
+    }
+}
+```
+### $project
+
+The $project stage specifies the fields of the output documents that you want to show in the results of your pipeline output.
+1 - means that the field should be included
+0 - means that the field should be supressed
+
+Example:
+```
+{
+    $project: {
+        state: 1,
+        zip: 1,
+        population: "$pop",
+        _id = 0
+    }
+}
+```
+### $set
+
+The $set stage creates new fields or changes the value of the existing fields, then outputs the documents with the new fields
+
+Example:
+```
+{
+    $set: {
+        place: {
+            $concat: ["$city" , "," , "$state"]
+        }
+    }
+}
+```
+### $count
+
+The $count stage creates a new document, with the number of documents at that stage in the pipeline assigned to the specified field name
+
+Example:
+```
+$count: "total_zips"
+```
+### $out
+
+The $out operator writes documents that are returned by the pipeline into a new collection. When a collection already exists the $out operator replaces the existing collection with new data. We must note that the $out operator should be used as the last stage within the pipeline to ensure results are obtained to populate the new collection.
+
+Example:
+```
+[{
+    $group: {
+        _id: $state,
+        total_pop: {$sum: "$pop"}
+    }
+},
+{
+    $match: {
+        total_pop: {$lt: 100000}
+    }
+},
+{
+    $out: "small_status"
+}]
+```
+### Close
+
+When we have an active connection to our Mongodb database instance we need to ensure we close our connection using the close() method to ensure we do not have any persisting connections to the instance.
