@@ -4,11 +4,14 @@
 A script that deletes multiple documents in a collection
 """
 # Import Libraries
+from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
+import os
 
 # Mongodb_uri
-MONGODB_URI = "mongodb+srv://myAtlasDBUser:TXR029w7QVCajDSQ@myatlasclusteredu.3xgmh1o.mongodb.net/?retryWrites=true&w=majority&appName=myAtlasClusterEDU"
+load_dotenv()
+MONGODB_URI = os.eviron["MONGODB_URI"]
 
 # Create a connection to the mongodb cluster 
 client = MongoClient(MONGODB_URI, server_api=ServerApi('1'))
