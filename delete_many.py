@@ -22,4 +22,15 @@ db = client.sample_analytics
 # Get a reference to the accounts collection
 accounts_collection = db.accounts
 
-#
+# filter the documents to delete
+documents_to_delete = {"limit": {"$gt": 30000}}
+
+# Write an expression that deletes the filtered documents from the accounts collection
+results = accounts_collection.delete_many(documents_to_delete)
+
+# Print the count of deleted documents from the above operation
+print("Documents deleted: " + str(results.deleted_count))
+
+# Close the connection to the mongodb instance
+client.close()
+
