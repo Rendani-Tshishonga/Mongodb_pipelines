@@ -70,7 +70,7 @@ When updating multiple documents that match a specific query we would need to ap
 
 We can delete a single document that matches a query by appending the delete_one method to the collection object. The delete_one method has a parameter, which is a filter that matches the document to delete. **We need to note something important about the delete_one method in that if you do not provide a parameter the delete_one method will delete the first document in the collection.**
 
-## Aggregation Operators
+## Pipeline Stages
 
 The collecton and the summary of data can be done through operators which enable developers to use built-in methods that can be computed on the data but does not permanently alter it. We can combine the various stages to create a an aggregation pipeline to allow the data to be **filetered**, **stored**, **grouped**, **transformed**.
 
@@ -93,7 +93,7 @@ The documents that are output of one stage act as input for the next stage of th
 
 ### **$match**
 
-filters for data that matches criteria
+filters for data that matches criteria.
 
 Example:
 ```
@@ -103,7 +103,7 @@ $match {
 ```
 ### $group
 
-The $group operator groups documents by a group key
+The $group stage groups documents by a group key.
 
 Example:
 ```
@@ -133,8 +133,9 @@ Example:
 ### $project
 
 The $project stage specifies the fields of the output documents that you want to show in the results of your pipeline output.
-1 - means that the field should be included
-0 - means that the field should be supressed
+
+1 - means that the field should be included.
+0 - means that the field should be supressed.
 
 Example:
 ```
@@ -171,7 +172,7 @@ $count: "total_zips"
 ```
 ### $out
 
-The $out operator writes documents that are returned by the pipeline into a new collection. When a collection already exists the $out operator replaces the existing collection with new data. We must note that the $out operator should be used as the last stage within the pipeline to ensure results are obtained to populate the new collection.
+The $out stage writes documents that are returned by the pipeline into a new collection. When a collection already exists the $out operator replaces the existing collection with new data. We must note that the $out operator should be used as the last stage within the pipeline to ensure results are obtained to populate the new collection.
 
 Example:
 ```
